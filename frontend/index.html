@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PHYSICAM</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>PHYSICAM</h1>
+
+        <p class="subtitle">
+            AI-powered visual diagnostic assistant
+        </p>
+
+        <div class="card">
+
+            <h2>Upload an Image</h2>
+
+            <p>
+                Upload a photo of the physical system you want to analyze.
+            </p>
+
+            <input type="file" id="imageInput" accept="image/*">
+
+            <div id="previewContainer">
+                <img id="preview" alt="Image preview">
+            </div>
+
+            <button onclick="analyzeImage()">
+                Analyze Image
+            </button>
+
+            <div id="loading">
+                Analyzing...
+            </div>
+
+            <div id="result"></div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
