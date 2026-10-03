@@ -1,59 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>PHYSICAM</title>
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
+    <link rel="stylesheet" href="style.css">
 
-  <body>
+</head>
+
+
+<body>
+
     <div class="container">
-      <h1>PHYSICAM</h1>
 
-      <p class="subtitle">AI-powered visual diagnostic assistant</p>
+        <h1>PHYSICAM</h1>
 
-      <div class="card">
-        <h2>What are you diagnosing?</h2>
+        <p class="subtitle">
+            AI-powered visual diagnostic assistant
+        </p>
 
-        <select id="systemType">
-          <option value="">Select a system</option>
-          <option value="electrical">Electrical System</option>
-          <option value="vehicle">Vehicle</option>
-          <option value="computer">Computer / Laptop</option>
-          <option value="other">Other Physical System</option>
-        </select>
 
-        <h2>What happened?</h2>
+        <div class="card">
 
-        <p>Describe the problem in your own words.</p>
 
-        <textarea
-          id="symptom"
-          placeholder="Example: The device suddenly switched off and I don't know what to do..."
-          rows="5"
-        ></textarea>
+            <!-- SYSTEM TYPE -->
 
-        <h2>Visual Evidence</h2>
+            <h2>What are you diagnosing?</h2>
 
-        <p>Upload a photo of the physical system or problem.</p>
+            <select id="systemType">
 
-        <input type="file" id="imageInput" accept="image/*" />
+                <option value="">
+                    Select a system
+                </option>
 
-        <div id="previewContainer">
-          <img id="preview" alt="Image preview" />
+                <option value="electrical">
+                    Electrical System
+                </option>
+
+                <option value="vehicle">
+                    Vehicle
+                </option>
+
+                <option value="computer">
+                    Computer / Laptop
+                </option>
+
+                <option value="appliance">
+                    Appliance
+                </option>
+
+                <option value="other">
+                    Other Physical System
+                </option>
+
+            </select>
+
+
+            <!-- MODEL -->
+
+            <h2>Make / Model</h2>
+
+            <p>
+                If you know the make or model, enter it here.
+                This is optional.
+            </p>
+
+            <input
+                type="text"
+                id="model"
+                placeholder="Example: Dell Inspiron 15 / Honda City 2022"
+            >
+
+
+            <!-- CURRENT SYMPTOM -->
+
+            <h2>What happened?</h2>
+
+            <p>
+                Describe the problem in your own words.
+            </p>
+
+            <textarea
+                id="symptom"
+                placeholder="Example: The device suddenly switched off and I don't know what to do..."
+                rows="5"
+            ></textarea>
+
+
+            <!-- PREVIOUS OCCURRENCE -->
+
+            <h2>Have you faced this problem before?</h2>
+
+            <select id="previousProblem">
+
+                <option value="">
+                    Select an option
+                </option>
+
+                <option value="no">
+                    No, this is the first time
+                </option>
+
+                <option value="once">
+                    Yes, once or twice
+                </option>
+
+                <option value="frequent">
+                    Yes, it happens frequently
+                </option>
+
+            </select>
+
+
+            <!-- PREVIOUS EXPERIENCE -->
+
+            <div id="previousDetailsContainer">
+
+                <h2>What happened previously?</h2>
+
+                <p>
+                    Tell us briefly what happened the last time.
+                </p>
+
+                <textarea
+                    id="previousDetails"
+                    placeholder="Example: It stopped working before, but started working again after charging..."
+                    rows="4"
+                ></textarea>
+
+            </div>
+
+
+            <!-- VISUAL EVIDENCE -->
+
+            <h2>Visual Evidence</h2>
+
+            <p>
+                Upload a photo of the physical system or problem.
+            </p>
+
+            <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+            >
+
+
+            <div id="previewContainer">
+
+                <img
+                    id="preview"
+                    alt="Image preview"
+                >
+
+            </div>
+
+
+            <button onclick="analyzeImage()">
+                Analyze Problem
+            </button>
+
+
+            <div id="loading">
+                Analyzing...
+            </div>
+
+
+            <div id="result"></div>
+
+
         </div>
 
-        <button onclick="analyzeImage()">Analyze Problem</button>
-
-        <div id="loading">Analyzing...</div>
-
-        <div id="result"></div>
-      </div>
     </div>
 
+
     <script src="script.js"></script>
-  </body>
+
+</body>
+
 </html>

@@ -3,18 +3,38 @@ const preview = document.getElementById("preview");
 const result = document.getElementById("result");
 const loading = document.getElementById("loading");
 
+const previousProblem = document.getElementById("previousProblem");
+
+const previousDetailsContainer = document.getElementById(
+  "previousDetailsContainer",
+);
+
+// Show previous problem details only when needed
+previousProblem.addEventListener("change", function () {
+  if (
+    previousProblem.value === "once" ||
+    previousProblem.value === "frequent"
+  ) {
+    previousDetailsContainer.style.display = "block";
+  } else {
+    previousDetailsContainer.style.display = "none";
+  }
+});
+
 // Show image preview
 imageInput.addEventListener("change", function () {
   const file = imageInput.files[0];
 
   if (!file) {
     preview.style.display = "none";
+
     return;
   }
 
   const imageURL = URL.createObjectURL(file);
 
   preview.src = imageURL;
+
   preview.style.display = "block";
 });
 
@@ -24,23 +44,32 @@ async function analyzeImage() {
 
   const systemType = document.getElementById("systemType").value;
 
+  const model = document.getElementById("model").value;
+
   const symptom = document.getElementById("symptom").value;
+
+  const previousProblem = document.getElementById("previousProblem").value;
+
+  const previousDetails = document.getElementById("previousDetails").value;
 
   // Check system type
   if (!systemType) {
     alert("Please select the system you want to diagnose.");
+
     return;
   }
 
   // Check symptom
   if (!symptom.trim()) {
     alert("Please describe what happened.");
+
     return;
   }
 
   // Check image
   if (!file) {
     alert("Please upload an image.");
+
     return;
   }
 
@@ -51,7 +80,13 @@ async function analyzeImage() {
 
   formData.append("system_type", systemType);
 
+  formData.append("model", model);
+
   formData.append("symptom", symptom);
+
+  formData.append("previous_problem", previousProblem);
+
+  formData.append("previous_details", previousDetails);
 
   // Show loading
   loading.style.display = "block";
@@ -71,100 +106,123 @@ async function analyzeImage() {
     if (data.status === "success") {
       result.innerHTML = `
 
-                <h3>OpenCV Analysis</h3>
+        <h3>OpenCV Analysis</h3>
 
-                <p>
-                    <strong>System:</strong>
-                    ${systemType}
-                </p>
+        <p>
+          <strong>System:</strong>
+          ${systemType}
+        </p>
 
-                <p>
-                    <strong>Problem:</strong>
-                    ${symptom}
-                </p>
+        <p>
+          <strong>Make / Model:</strong>
+          ${model || "Not provided"}
+        </p>
 
-                <p>
-                    <strong>File:</strong>
-                    ${data.filename}
-                </p>
+        <p>
+          <strong>Problem:</strong>
+          ${symptom}
+        </p>
 
-                <p>
-                    <strong>Image Size:</strong>
-                    ${data.image_width} × ${data.image_height}
-                </p>
+        <p>
+          <strong>Previous Problem:</strong>
+          ${previousProblem || "Not provided"}
+        </p>
 
-                <p>
-                    <strong>Brightness:</strong>
-                    ${data.brightness}
-                </p>
+        ${
+          previousDetails
+            ? `
+              <p>
+                <strong>Previous Details:</strong>
+                ${previousDetails}
+              </p>
+            `
+            : ""
+        }
 
-                <p>
-                    <strong>Edge Density:</strong>
-                    ${data.edge_density}
-                </p>
+        <p>
+          <strong>File:</strong>
+          ${data.filename}
+        </p>
 
-                <p>
-                    <strong>Contours Detected:</strong>
-                    ${data.contour_count}
-                </p>
+        <p>
+          <strong>Image Size:</strong>
+          ${data.image_width} × ${data.image_height}
+        </p>
 
-                <p>
-                    <strong>Bright Region:</strong>
-                    ${data.bright_region_percentage}%
-                </p>
+        <p>
+          <strong>Brightness:</strong>
+          ${data.brightness}
+        </p>
 
-                <p>
-                    <strong>Possible Anomaly:</strong>
-                    ${data.possible_anomaly ? "Yes" : "No"}
-                </p>
+        <p>
+          <strong>Edge Density:</strong>
+          ${data.edge_density}
+        </p>
 
-                <p>
-    <strong>Observation:</strong>
-    ${data.observation}
-</p>
+        <p>
+          <strong>Contours Detected:</strong>
+          ${data.contour_count}
+        </p>
 
-<p>
-    <strong>Diagnosis Status:</strong>
-    ${data.diagnosis_status}
-</p>
+        <p>
+          <strong>Bright Region:</strong>
+          ${data.bright_region_percentage}%
+        </p>
 
-<p>
-    <strong>Possible Causes:</strong>
-</p>
+        <p>
+          <strong>Possible Anomaly:</strong>
+          ${data.possible_anomaly ? "Yes" : "No"}
+        </p>
 
-<ul>
-    ${data.possible_causes.map((cause) => `<li>${cause}</li>`).join("")}
-</ul>
+        <p>
+          <strong>Observation:</strong>
+          ${data.observation}
+        </p>
 
-<p>
-    <strong>Recommended Next Step:</strong>
-    ${data.next_step}
-</p>
+        <p>
+          <strong>Diagnosis Status:</strong>
+          ${data.diagnosis_status}
+        </p>
 
-<p>
-    <strong>Safety:</strong>
-    ${data.safety}
-</p>
+        <p>
+          <strong>Possible Causes:</strong>
+        </p>
 
-<p>
-    ${data.message}
-</p>
+        <ul>
+          ${data.possible_causes.map((cause) => `<li>${cause}</li>`).join("")}
+        </ul>
 
-            `;
+        <p>
+          <strong>Recommended Next Step:</strong>
+          ${data.next_step}
+        </p>
+
+        <p>
+          <strong>Safety:</strong>
+          ${data.safety}
+        </p>
+
+        <p>
+          ${data.message}
+        </p>
+
+      `;
     } else {
       result.innerHTML = `
-                <p>${data.message}</p>
-            `;
+        <p>${data.message}</p>
+      `;
     }
   } catch (error) {
     result.style.display = "block";
 
     result.innerHTML = `
-            <p>
-                Could not connect to PHYSICAM backend.
-                Make sure the FastAPI server is running.
-            </p>
-        `;
+
+      <p>
+        Could not connect to PHYSICAM backend.
+        Make sure the FastAPI server is running.
+      </p>
+
+    `;
 
     console.error(error);
   } finally {
