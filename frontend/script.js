@@ -46,41 +46,66 @@ async function analyzeImage() {
 
     if (data.status === "success") {
       result.innerHTML = `
-                <h3>OpenCV Analysis</h3>
+        <h3>OpenCV Analysis</h3>
 
-                <p>
-                    <strong>File:</strong>
-                    ${data.filename}
-                </p>
+        <p>
+          <strong>File:</strong>
+          ${data.filename}
+        </p>
 
-                <p>
-                    <strong>Image Size:</strong>
-                    ${data.image_width} × ${data.image_height}
-                </p>
+        <p>
+          <strong>Image Size:</strong>
+          ${data.image_width} × ${data.image_height}
+        </p>
 
-                <p>
-                    <strong>Brightness:</strong>
-                    ${data.brightness}
-                </p>
+        <p>
+          <strong>Brightness:</strong>
+          ${data.brightness}
+        </p>
 
-                <p>
-                    ${data.message}
-                </p>
-            `;
+        <p>
+          <strong>Edge Density:</strong>
+          ${data.edge_density}
+        </p>
+
+        <p>
+          <strong>Contours Detected:</strong>
+          ${data.contour_count}
+        </p>
+
+        <p>
+          <strong>Bright Region:</strong>
+          ${data.bright_region_percentage}%
+        </p>
+
+        <p>
+          <strong>Possible Anomaly:</strong>
+          ${data.possible_anomaly ? "Yes" : "No"}
+        </p>
+
+        <p>
+          <strong>Observation:</strong>
+          ${data.observation}
+        </p>
+
+        <p>
+          ${data.message}
+        </p>
+      `;
     } else {
       result.innerHTML = `
-                <p>${data.message}</p>
-            `;
+        <p>${data.message}</p>
+      `;
     }
   } catch (error) {
     result.style.display = "block";
 
     result.innerHTML = `
-            <p>
-                Could not connect to PHYSICAM backend.
-                Make sure the FastAPI server is running.
-            </p>
-        `;
+      <p>
+        Could not connect to PHYSICAM backend.
+        Make sure the FastAPI server is running.
+      </p>
+    `;
 
     console.error(error);
   } finally {
