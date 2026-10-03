@@ -1,132 +1,262 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #07111f;
-    color: white;
-    min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: #07111f;
+  color: white;
+  min-height: 100vh;
 }
 
 .container {
-    width: 90%;
-    max-width: 900px;
-    margin: 60px auto;
-    text-align: center;
+  width: 90%;
+  max-width: 900px;
+  margin: 60px auto;
+  text-align: center;
 }
 
 h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
+  font-size: 48px;
+  margin-bottom: 10px;
 }
 
 .subtitle {
-    color: #9fb3c8;
-    margin-bottom: 40px;
+  color: #9fb3c8;
+  margin-bottom: 40px;
 }
 
 .card {
-    background: #101d2d;
-    border: 1px solid #26384d;
-    border-radius: 18px;
-    padding: 35px;
+  background: #101d2d;
+  border: 1px solid #26384d;
+  border-radius: 18px;
+  padding: 35px;
 }
 
 .card h2 {
-    margin-bottom: 12px;
+  margin-bottom: 12px;
 }
 
 .card p {
-    color: #aebdcd;
-    margin-bottom: 25px;
+  color: #aebdcd;
+  margin-bottom: 25px;
 }
 
 input[type="file"] {
-    display: block;
-    margin: 20px auto;
-    padding: 10px;
-    color: white;
+  display: block;
+  margin: 20px auto;
+  padding: 10px;
+  color: white;
 }
 
 button {
-    margin-top: 20px;
-    padding: 13px 30px;
-    border: none;
-    border-radius: 8px;
-    background: #1683ff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+  margin-top: 20px;
+  padding: 13px 30px;
+  border: none;
+  border-radius: 8px;
+  background: #1683ff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 button:hover {
-    background: #006edc;
+  background: #006edc;
 }
 
 #previewContainer {
-    margin: 20px auto;
+  margin: 20px auto;
 }
 
 #preview {
-    max-width: 100%;
-    max-height: 350px;
-    border-radius: 10px;
-    display: none;
+  max-width: 100%;
+  max-height: 350px;
+  border-radius: 10px;
+  display: none;
 }
 
 #loading {
-    display: none;
-    margin-top: 25px;
-    color: #58a6ff;
+  display: none;
+  margin-top: 25px;
+  color: #58a6ff;
 }
 
 #result {
-    margin-top: 25px;
-    text-align: left;
-    background: #081421;
-    padding: 20px;
-    border-radius: 10px;
-    display: none;
+  margin-top: 25px;
+  text-align: left;
+  background: #081421;
+  padding: 20px;
+  border-radius: 10px;
+  display: none;
 }
 /* --------------------------------------------------
    PHYSICAM Visual Evidence
 -------------------------------------------------- */
 
 .visual-evidence-section {
-    margin-top: 24px;
-    padding: 20px;
-    border-radius: 16px;
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 16px;
 }
 
 .annotated-image {
-    width: 100%;
-    max-width: 700px;
-    display: block;
-    margin: 18px auto;
-    border-radius: 12px;
+  width: 100%;
+  max-width: 700px;
+  display: block;
+  margin: 18px auto;
+  border-radius: 12px;
 }
 
 .evidence-note {
-    font-size: 13px;
-    opacity: 0.75;
-    line-height: 1.5;
+  font-size: 13px;
+  opacity: 0.75;
+  line-height: 1.5;
 }
 
 .metrics {
-    line-height: 1.7;
+  line-height: 1.7;
 }
 
 .observation {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 12px;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
 }
 
 .message {
-    margin-top: 20px;
-    font-size: 13px;
-    opacity: 0.75;
+  margin-top: 20px;
+  font-size: 13px;
+  opacity: 0.75;
+}
+/* ==================================================
+   PHYSICAM ANALYSIS RESULT
+================================================== */
+
+.analysis-result {
+  margin-top: 30px;
+  padding: 24px;
+  border-radius: 18px;
+  line-height: 1.6;
+}
+
+.analysis-result h2 {
+  margin-bottom: 25px;
+}
+
+.result-section {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 14px;
+}
+
+.result-section h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.result-section p {
+  margin: 8px 0;
+}
+
+/* ==================================================
+   METRICS
+================================================== */
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.metric {
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.metric span {
+  display: block;
+  font-size: 13px;
+  opacity: 0.75;
+  margin-bottom: 5px;
+}
+
+.metric strong {
+  font-size: 16px;
+}
+
+/* ==================================================
+   VISUAL EVIDENCE
+================================================== */
+
+.visual-evidence-box {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.annotated-image {
+  width: 100%;
+  max-width: 700px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 14px;
+}
+
+.evidence-note {
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+/* ==================================================
+   DIAGNOSIS
+================================================== */
+
+.diagnosis-status {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.cause-list {
+  padding-left: 22px;
+}
+
+.cause-list li {
+  margin-bottom: 8px;
+}
+
+/* ==================================================
+   SAFETY
+================================================== */
+
+.safety-section {
+  border-left: 4px solid #ff9800;
+}
+
+/* ==================================================
+   MESSAGE
+================================================== */
+
+.physicam-message {
+  margin-top: 20px;
+  padding: 14px;
+  font-size: 13px;
+  opacity: 0.75;
+  border-radius: 12px;
+}
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 600px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .analysis-result {
+    padding: 16px;
+  }
 }
