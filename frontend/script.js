@@ -18,20 +18,44 @@ imageInput.addEventListener("change", function () {
   preview.style.display = "block";
 });
 
-// Send image to backend
+// Send problem information to backend
 async function analyzeImage() {
   const file = imageInput.files[0];
 
-  if (!file) {
-    alert("Please select an image first.");
+  const systemType = document.getElementById("systemType").value;
+
+  const symptom = document.getElementById("symptom").value;
+
+  // Check system type
+  if (!systemType) {
+    alert("Please select the system you want to diagnose.");
     return;
   }
 
+  // Check symptom
+  if (!symptom.trim()) {
+    alert("Please describe what happened.");
+    return;
+  }
+
+  // Check image
+  if (!file) {
+    alert("Please upload an image.");
+    return;
+  }
+
+  // Prepare data
   const formData = new FormData();
 
   formData.append("file", file);
 
+  formData.append("system_type", systemType);
+
+  formData.append("symptom", symptom);
+
+  // Show loading
   loading.style.display = "block";
+
   result.style.display = "none";
 
   try {
@@ -46,66 +70,83 @@ async function analyzeImage() {
 
     if (data.status === "success") {
       result.innerHTML = `
-        <h3>OpenCV Analysis</h3>
 
-        <p>
-          <strong>File:</strong>
-          ${data.filename}
-        </p>
+                <h3>OpenCV Analysis</h3>
 
-        <p>
-          <strong>Image Size:</strong>
-          ${data.image_width} × ${data.image_height}
-        </p>
+                <p>
+                    <strong>System:</strong>
+                    ${systemType}
+                </p>
 
-        <p>
-          <strong>Brightness:</strong>
-          ${data.brightness}
-        </p>
+                <p>
+                    <strong>Problem:</strong>
+                    ${symptom}
+                </p>
 
-        <p>
-          <strong>Edge Density:</strong>
-          ${data.edge_density}
-        </p>
+                <p>
+                    <strong>File:</strong>
+                    ${data.filename}
+                </p>
 
-        <p>
-          <strong>Contours Detected:</strong>
-          ${data.contour_count}
-        </p>
+                <p>
+                    <strong>Image Size:</strong>
+                    ${data.image_width} × ${data.image_height}
+                </p>
 
-        <p>
-          <strong>Bright Region:</strong>
-          ${data.bright_region_percentage}%
-        </p>
+                <p>
+                    <strong>Brightness:</strong>
+                    ${data.brightness}
+                </p>
 
-        <p>
-          <strong>Possible Anomaly:</strong>
-          ${data.possible_anomaly ? "Yes" : "No"}
-        </p>
+                <p>
+                    <strong>Edge Density:</strong>
+                    ${data.edge_density}
+                </p>
 
-        <p>
-          <strong>Observation:</strong>
-          ${data.observation}
-        </p>
+                <p>
+                    <strong>Contours Detected:</strong>
+                    ${data.contour_count}
+                </p>
 
-        <p>
-          ${data.message}
-        </p>
-      `;
+                <p>
+                    <strong>Bright Region:</strong>
+                    ${data.bright_region_percentage}%
+                </p>
+
+                <p>
+                    <strong>Possible Anomaly:</strong>
+                    ${data.possible_anomaly ? "Yes" : "No"}
+                </p>
+
+                <p>
+    <strong>Observation:</strong>
+    ${data.observation}
+</p>
+
+<p>
+    <strong>Diagnostic Guidance:</strong>
+    ${data.diagnostic_message}
+</p>
+
+<p>
+    ${data.message}
+</p>
+
+            `;
     } else {
       result.innerHTML = `
-        <p>${data.message}</p>
-      `;
+                <p>${data.message}</p>
+            `;
     }
   } catch (error) {
     result.style.display = "block";
 
     result.innerHTML = `
-      <p>
-        Could not connect to PHYSICAM backend.
-        Make sure the FastAPI server is running.
-      </p>
-    `;
+            <p>
+                Could not connect to PHYSICAM backend.
+                Make sure the FastAPI server is running.
+            </p>
+        `;
 
     console.error(error);
   } finally {

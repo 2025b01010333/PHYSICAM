@@ -1,53 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>PHYSICAM</title>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-
+  <body>
     <div class="container">
+      <h1>PHYSICAM</h1>
 
-        <h1>PHYSICAM</h1>
+      <p class="subtitle">AI-powered visual diagnostic assistant</p>
 
-        <p class="subtitle">
-            AI-powered visual diagnostic assistant
-        </p>
+      <div class="card">
+        <h2>What are you diagnosing?</h2>
 
-        <div class="card">
+        <select id="systemType">
+          <option value="">Select a system</option>
+          <option value="electrical">Electrical System</option>
+          <option value="vehicle">Vehicle</option>
+          <option value="computer">Computer / Laptop</option>
+          <option value="other">Other Physical System</option>
+        </select>
 
-            <h2>Upload an Image</h2>
+        <h2>What happened?</h2>
 
-            <p>
-                Upload a photo of the physical system you want to analyze.
-            </p>
+        <p>Describe the problem in your own words.</p>
 
-            <input type="file" id="imageInput" accept="image/*">
+        <textarea
+          id="symptom"
+          placeholder="Example: The device suddenly switched off and I don't know what to do..."
+          rows="5"
+        ></textarea>
 
-            <div id="previewContainer">
-                <img id="preview" alt="Image preview">
-            </div>
+        <h2>Visual Evidence</h2>
 
-            <button onclick="analyzeImage()">
-                Analyze Image
-            </button>
+        <p>Upload a photo of the physical system or problem.</p>
 
-            <div id="loading">
-                Analyzing...
-            </div>
+        <input type="file" id="imageInput" accept="image/*" />
 
-            <div id="result"></div>
-
+        <div id="previewContainer">
+          <img id="preview" alt="Image preview" />
         </div>
 
+        <button onclick="analyzeImage()">Analyze Problem</button>
+
+        <div id="loading">Analyzing...</div>
+
+        <div id="result"></div>
+      </div>
     </div>
 
     <script src="script.js"></script>
-
-</body>
+  </body>
 </html>
