@@ -124,8 +124,26 @@ async function analyzeImage() {
 </p>
 
 <p>
-    <strong>Diagnostic Guidance:</strong>
-    ${data.diagnostic_message}
+    <strong>Diagnosis Status:</strong>
+    ${data.diagnosis_status}
+</p>
+
+<p>
+    <strong>Possible Causes:</strong>
+</p>
+
+<ul>
+    ${data.possible_causes.map((cause) => `<li>${cause}</li>`).join("")}
+</ul>
+
+<p>
+    <strong>Recommended Next Step:</strong>
+    ${data.next_step}
+</p>
+
+<p>
+    <strong>Safety:</strong>
+    ${data.safety}
 </p>
 
 <p>
